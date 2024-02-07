@@ -1,0 +1,15 @@
+# Arquivos temporários
+*.pyc
+__pycache__/
+
+# Ambiente virtual
+venv/
+env/
+
+# Arquivos de configuração local
+.env
+local_settings.py
+
+# Diretório de saída de compilação
+/static/
+/media/
