@@ -31,12 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'configs.wsgi.application'
 
+JAZZMIN_SETTINGS = {
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "search_bar": False,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "site_title": "Seu Título do Site",
+    "site_header": "Seu Cabeçalho do Site",
+    "welcome_sign": "Bem-vindo ao Django Jazzmin",
+    "custom_css": None,
+    "custom_js": None,
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -107,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
