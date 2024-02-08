@@ -4,44 +4,60 @@
 {% leaflet_css %}
 
 {% block content %}
-    <h2>Mapa do Brasil</h2>
-    <div id="map" style="height: 600px; width: 1350px"></div>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    
-    
-    <script>
-        var map = L.map('map');
-    
-        // Verifica se o navegador suporta a API de geolocalização
-        if (navigator.geolocation) {
-          // Obtém a localização do usuário
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var userLat = position.coords.latitude;
-            var userLng = position.coords.longitude;
-    
-            // Configura o mapa para a localização do usuário
-            map.setView([userLat, userLng], 12);
-    
-            // Adiciona um marcador na localização do usuário
-            var userMarker = L.marker([userLat, userLng]).addTo(map);
-            userMarker.bindPopup("Sua Localização").openPopup();
-          }, function(error) {
-            // Caso ocorra um erro ao obter a localização
-            console.error("Erro ao obter a localização:", error);
-            // Configura o mapa para uma visualização padrão
-            map.setView([-15.7801, -47.9292], 4);
-          });
-        } else {
-          // Caso o navegador não suporte a API de geolocalização
-          console.error("Seu navegador não suporta a API de geolocalização.");
+  
+  <a type="button" class="btn btn-primary" href="{% url 'core:create' %}">
+    Cadastrar
+  </a>
+ 
+  <div id="map" style="height: 600px; width: 1500px"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <script>
+      var map = L.map('map');
+  
+      // Verifica se o navegador suporta a API de geolocalização
+      if (navigator.geolocation) {
+        // Obtém a localização do usuário
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var userLat = position.coords.latitude;
+          var userLng = position.coords.longitude;
+  
+          // Configura o mapa para a localização do usuário
+          map.setView([userLat, userLng], 12);
+  
+          // Adiciona um marcador na localização do usuário
+          var userMarker = L.marker([userLat, userLng]).addTo(map);
+          userMarker.bindPopup("Sua Localização").openPopup();
+        }, function(error) {
+          // Caso ocorra um erro ao obter a localização
+          console.error("Erro ao obter a localização:", error);
           // Configura o mapa para uma visualização padrão
           map.setView([-15.7801, -47.9292], 4);
-        }
+        });
+      } else {
+        // Caso o navegador não suporte a API de geolocalização
+        console.error("Seu navegador não suporta a API de geolocalização.");
+        // Configura o mapa para uma visualização padrão
+        map.setView([-15.7801, -47.9292], 4);
+      }
+  
+      // Adiciona a camada do OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Adiciona marcadores para cada registro em map_data
+    var mapData = {{ map_data|safe }};
+    for (var i = 0; i < mapData.length; i++) {
+      var target = mapData[i];
+      var marker = L.marker([target.latitude, target.longitude]).addTo(map);
+      // Formata o conteúdo do pop-up
+      // var popupContent = '<strong>' + target.nome + '</strong><br>' +
+      //                   'Latitude: ' + target.latitude + '<br>' +
+      //                   'Longitude: ' + target.longitude;
+      // marker.bindPopup(popupContent);
+    }
     
-        // Adiciona a camada do OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-    </script>
+  </script>
 {% endblock content %}

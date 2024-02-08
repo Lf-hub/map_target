@@ -1,5 +1,8 @@
+from django.urls import reverse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+
+from core.forms import TargetForm
 
 from core.models import Target
 
@@ -26,3 +29,27 @@ class TargetIndex(ListView):
             })
 
         return map_data
+
+class TargetCreate(CreateView):
+    model = Target
+    template_name = 'target_create.html'
+    success_url = '/index'
+    form_class = TargetForm
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(TargetCreate, self).get_form_kwargs()
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+   
+
+
+class TargetDetail(DetailView):
+    model = Target
+    template_name = 'target_detail.html'    
+
