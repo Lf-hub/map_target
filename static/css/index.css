@@ -19,12 +19,11 @@
 }
 
 .sidebar {
+    width: 200px; /* Ajuste o valor conforme necessário */
+    background-color: #4e73df;
     color: #f8f9fc;
-    min-height: 100vh;
     text-align: center;
-    padding: 3;
-    font-weight: 800;
-    font-size: 100
+    font-size: 16px; /* Ajuste o valor conforme necessário */
 }
 
 
