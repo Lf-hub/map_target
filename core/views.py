@@ -1,6 +1,5 @@
-from django.urls import reverse
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DeleteView, UpdateView, CreateView
 
 from core.forms import TargetForm
 
@@ -17,7 +16,7 @@ class TargetIndex(ListView):
         return context
 
     def get_map_data(self):
-        # Obtém dados para o mapa, neste exemplo, as coordenadas dos alvos
+        # Obtém as coordenadas dos alvos
         targets = Target.objects.all()
         map_data = []
 
@@ -29,6 +28,10 @@ class TargetIndex(ListView):
             })
 
         return map_data
+
+class TargetList(ListView):
+    model = Target
+    template_name = 'target_list.html'
 
 class TargetCreate(CreateView):
     model = Target
@@ -46,10 +49,16 @@ class TargetCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-   
 
 
-class TargetDetail(DetailView):
+class TargetUpdate(UpdateView):
     model = Target
-    template_name = 'target_detail.html'    
+    template_name = 'target_detail.html'
+    fields = ['name', 'latitude', 'longitude']
+    success_url = reverse_lazy('core:index')
 
+class TargetDelete(DeleteView):
+    model = Target
+    
+    def get_success_url(self):
+        return reverse_lazy("core:index")
