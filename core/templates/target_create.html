@@ -1,11 +1,28 @@
 {% extends "base.html" %}
-
 {% block content %}
-<div class="modal-body">
-    <form action="{% url 'core:create' %}" method="POST">
-        {% csrf_token %}    
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+<div class="full-width">
+    <form method="post" action="{% url 'core:create' %}">
+        {% csrf_token %}
+    <table class="table">
+        <thead class="body-title">
+            <tr class= "bg-gray-200 p-2">
+                <th>Nome</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="cell-input" type="text" name="name"></td>
+                <td><input class="cell-input" type="text" name="latitude"></td>
+                <td><input class="cell-input" type="text" name="longitude"></td>
+                <td><input class="cell-input" type="date" name="expiration_date"></td>
+        </tbody>
+    </table>
+    <a class="btn btn-secondary" href="{% url 'core:list' %}">Voltar</a>
+    <button type="submit">Salvar</button>
     </form>
 </div>
 {% endblock content %}

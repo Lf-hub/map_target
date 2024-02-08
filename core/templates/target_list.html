@@ -3,6 +3,9 @@
 {% block content %}
 
 <div class="full-width">
+    
+    <a class="btn btn-primary" href="{% url 'core:create' %}">Criar Novo Objeto</a>
+    
     <table class="table">
         <thead class="body-title">
             <tr class= "bg-gray-200 p-2">
@@ -19,7 +22,7 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.latitude }}</td>
                 <td>{{ item.longitude }}</td>
-                <td>{{ item.date }}</td>
+                <td>{{ item.expiration_date }}</td>
                 <td class="action-cell">
                     <a class="btn btn-warning"title="Editar"
                         href="{% url 'core:update' item.id %}">Editar

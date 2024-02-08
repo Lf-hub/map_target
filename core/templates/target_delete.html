@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="full-width">
+    <table class="table">
+        <thead class="body-title">
+            <tr class= "bg-gray-200 p-2">
+                <th>Nome</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ object.name }}</td>
+                <td>{{ object.latitude }}</td>
+                <td>{{ object.longitude }}</td>
+                <td>{{ object.expiration_date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Botões de Ação -->
+    <div class="action-buttons">
+        <a class="btn btn-secondary" href="{% url 'core:list' %}">Voltar</a>
+        <form method="post" action="{% url 'core:delete' pk=object.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

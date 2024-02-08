@@ -76,3 +76,11 @@ th {
 .action-cell {
     vertical-align: middle; /* Centraliza verticalmente os botões na célula */
 }
+
+/* Adiciona espaçamento interno nas células dos inputs */
+.cell-input {
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}

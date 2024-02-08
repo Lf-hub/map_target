@@ -36,7 +36,7 @@ class TargetList(ListView):
 class TargetCreate(CreateView):
     model = Target
     template_name = 'target_create.html'
-    success_url = '/index'
+    success_url = reverse_lazy('core:list')
     form_class = TargetForm
 
     def form_valid(self, form):
@@ -55,10 +55,11 @@ class TargetUpdate(UpdateView):
     model = Target
     template_name = 'target_detail.html'
     fields = ['name', 'latitude', 'longitude']
-    success_url = reverse_lazy('core:index')
+    success_url = reverse_lazy('core:list')
 
 class TargetDelete(DeleteView):
     model = Target
+    template_name = 'target_delete.html'
     
     def get_success_url(self):
-        return reverse_lazy("core:index")
+        return reverse_lazy("core:list")

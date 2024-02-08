@@ -1,5 +1,29 @@
 {% extends "base.html" %}
-
 {% block content %}
-    {{object}}
+
+<div class="full-width">
+    <form method="post" action="{% url 'core:update' object.id %}">
+        {% csrf_token %}
+    <table class="table">
+        <thead class="body-title">
+            <tr class= "bg-gray-200 p-2">
+                <th>Nome</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="cell-input" type="text" name="name" value="{{ object.name }}"></td>
+                <td><input class="cell-input" type="text" name="latitude" value="{{ object.latitude }}"></td>
+                <td><input class="cell-input" type="text" name="longitude" value="{{ object.longitude }}"></td>
+                <td><input class="cell-input" type="text" name="date" value="{{ object.expiration_date }}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-secondary" href="{% url 'core:list' %}">Voltar</a>
+    <button type="submit">Salvar</button>
+    </form>
+</div>
 {% endblock content %}
